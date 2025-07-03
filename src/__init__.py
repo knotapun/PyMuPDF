@@ -10173,7 +10173,6 @@ class Pixmap:
 
         return f"Pixmap({colorspace}, {self.irect}, {self.alpha})"
 
-
     def _tobytes(self, format_, jpg_quality):
         '''
         Pixmap._tobytes
