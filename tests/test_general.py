@@ -609,7 +609,7 @@ def test_2596():
     pix1 = page.get_pixmap()
     assert pix1.samples == pix0.samples
     rebased = hasattr(pymupdf, 'mupdf')
-    if rebased:
+    if pymupdf.mupdf_version_tuple < (1, 27):
         wt = pymupdf.TOOLS.mupdf_warnings()
         assert wt == 'too many indirections (possible indirection cycle involving 24 0 R)'
 
@@ -1907,3 +1907,9 @@ def test_4564():
         assert document.metadata['producer'] == 'Adobe PSL 1.3e for Canon\x00'
     else:
         assert document.metadata['producer'] == 'Adobe PSL 1.3e for Canon\udcc0\udc80'
+
+
+def test_4496():
+    path = os.path.normpath(f'{__file__}/../../tests/resources/test_4496.hwpx')
+    with pymupdf.open(path) as document:
+        print(document.page_count)
